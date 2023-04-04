@@ -3,3 +3,15 @@
 #
 # See http://willthames.github.io/2018/07/01/connection-local-vs-delegate_to-localhost.html.
 ansible_python_interpreter: '{{ ansible_playbook_python }}'
+
+
+rules_name_list_groupvar:
+  - 
+    rule_name: Rule_list_gv_test1
+    sz_name: ['untrust']
+  - 
+    rule_name: Rule_list_gv_test2
+    sz_name: ['untrust']
+  - 
+    rule_name: Rule_list_gv_test3
+    sz_name: ['untrust']

@@ -31,7 +31,7 @@
       api_key: '{{ api_key | default(omit) }}'
 
   tasks:
-    - name: Create List of security rules
+    - name: Create List of security rules from HostVar
       paloaltonetworks.panos.panos_security_rule:
         provider: '{{ device }}'
         rule_name: "{{ item.rule_name }}"
@@ -44,5 +44,20 @@
         action: 'allow'
         tag_name: ['Prod']
         commit: false
-      loop: "{{ rules_name_list }}"
-      
+      loop: "{{ rules_name_list_hostvar }}"
+
+    - name: Create List of security rules from GroupVar
+      paloaltonetworks.panos.panos_security_rule:
+        provider: '{{ device }}'
+        rule_name: "{{ item.rule_name }}"
+        source_zone: "{{ item.sz_name }}"
+        destination_zone: ['trust']
+        source_ip: ['any']
+        destination_ip: ['Prod-Instances']
+        application: ['ssh']
+        service: ['application-default']
+        action: 'allow'
+        tag_name: ['Prod']
+        commit: false
+      loop: "{{ rules_name_list_groupvar }}"
+           

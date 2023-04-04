@@ -3,13 +3,13 @@ ip_address: '192.168.1.222'
 username: admin
 password: admin
 
-rules_name_list:
+rules_name_list_hostvar:
   - 
-    rule_name: Rule_list_test1
+    rule_name: Rule_list_hv_test1
     sz_name: ['untrust']
   - 
-    rule_name: Rule_list_test2
+    rule_name: Rule_list_hv_test2
     sz_name: ['untrust']
   - 
-    rule_name: Rule_list_test3
+    rule_name: Rule_list_hv_test3
     sz_name: ['untrust']
