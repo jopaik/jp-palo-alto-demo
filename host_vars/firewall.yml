@@ -2,3 +2,8 @@
 ip_address: '192.168.1.222'
 username: admin
 password: admin
+
+rules_name_list:
+  - Rule_list_test1
+  - Rule_list_test2
+  - Rule_list_test3
