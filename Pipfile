@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pan-python = "*"
+xmltodict = "*"
+boto3 = "*"
+pan-os-python = "*"
+paramiko = "*"
+
+[dev-packages]
+ansible = "*"
+ansible-lint = "*"
