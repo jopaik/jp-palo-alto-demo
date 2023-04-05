@@ -1,0 +1,16 @@
+bcrypt
+boto3
+botocore
+cffi
+cryptography
+jmespath
+pan-os-python
+pan-python
+paramiko
+pycparser
+pynacl
+python-dateutil
+s3transfer
+six
+urllib3
+xmltodict
