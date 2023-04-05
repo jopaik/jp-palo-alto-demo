@@ -1,4 +1,4 @@
 ---
 collections:
   - name: paloaltonetworks.panos
-    source: rh-certified_repo
+    source: https://192.168.1.161/api/galaxy/content/rh-certified/
