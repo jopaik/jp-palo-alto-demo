@@ -16,10 +16,10 @@
       - "set template {{ sc-endpoint-template }} config network interface tunnel units {{ tunnel-number }} comment {{ sc-ipsec-tunnel }}"
       - "set template {{ sc-endpoint-template }} config network interface tunnel units {{ tunnel-number }} ip {{ tunnel-ip-mask }}"
 
-        tasks:
-          - name: Set List of OP commands
-            paloaltonetworks.panos.panos_op:
-              provider: '{{ device }}'
-              cmd: "{{ item }}"
-              ignore_disconnect: True
-            loop: "{{ set_cli_templates }}"
+  tasks:
+    - name: Set List of OP commands
+      paloaltonetworks.panos.panos_op:
+        provider: '{{ device }}'
+        cmd: "{{ item }}"
+        ignore_disconnect: True
+      loop: "{{ set_cli_templates }}"

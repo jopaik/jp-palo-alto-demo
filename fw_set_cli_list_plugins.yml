@@ -25,10 +25,10 @@
       - "set plugins cloud_services service-connection onboarding {{ sc-name }} ipsec-tunnel {{ sc-ipsec-tunnel }}"
       - "set plugins cloud_services service-connection onboarding {{ sc-name }} secondary-wan-enabled no"
 
-        tasks:
-          - name: Set List of OP commands
-            paloaltonetworks.panos.panos_op:
-              provider: '{{ device }}'
-              cmd: "{{ item }}"
-              ignore_disconnect: True
-            loop: "{{ set_cli_plugins }}"
+  tasks:
+    - name: Set List of OP commands
+      paloaltonetworks.panos.panos_op:
+        provider: '{{ device }}'
+        cmd: "{{ item }}"
+        ignore_disconnect: True
+      loop: "{{ set_cli_plugins }}"
