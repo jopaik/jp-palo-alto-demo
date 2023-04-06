@@ -22,7 +22,7 @@
       - "set plugins cloud_services service-connection onboarding {{ sc-name }} protocol bgp local-ip-address {{ sc-tunnel-local-ip }}"
       - "set plugins cloud_services service-connection onboarding {{ sc-name }} protocol bgp secret {{ bgp-secret }}"
       - "set plugins cloud_services service-connection onboarding {{ sc-name }} region {{ sc-region }}"
-      - "set plugins cloud_services service-connection onboarding {{ sc-name }}ipsec-tunnel {{ sc-ipsec-tunnel }}"
+      - "set plugins cloud_services service-connection onboarding {{ sc-name }} ipsec-tunnel {{ sc-ipsec-tunnel }}"
       - "set plugins cloud_services service-connection onboarding {{ sc-name }} secondary-wan-enabled no"
 
         tasks:
