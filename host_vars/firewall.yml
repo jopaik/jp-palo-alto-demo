@@ -28,8 +28,5 @@ rules_name_list_hostvar:
 
 
 set_cli_rules_name_list_hostvar:
-  - configure
-  - set rulebase security rules joon1 from any to any 
-  - set rulebase security rules joon2 from any to any 
-  - set rulebase security rules joon3 from any to any 
-  
+  - set cli timeout
+  - set panorama on
