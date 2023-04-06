@@ -26,7 +26,9 @@ rules_name_list_hostvar:
     rule_name: Rule_list_hv_test3
     sz_name: ['untrust']
 
+timeout: 60
+pan_state: on 
 
 set_cli_rules_name_list_hostvar:
-  - set cli timeout idle 60
-  - set panorama on
+  - "set cli timeout idle {{ timeout }}"
+  - "set panorama {{ pan_state }}"
