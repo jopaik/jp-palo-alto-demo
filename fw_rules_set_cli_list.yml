@@ -1,0 +1,45 @@
+---
+# fw_rules.yml - Create security rules on a PAN-OS device.
+#
+# Description
+# ===========
+#
+# Quick examples of how to use the 'panos_security_rule' module to create security rules on a PAN-OS device.
+#
+# This playbook requires connection details for the device to be specified in the variables 'ip_address', 'username',
+# and 'password'.  These may be defined as host variables (see `host_vars/firewall.yml` for an example) or
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# panos_security_rule - https://paloaltonetworks.github.io/pan-os-ansible/modules/panos_security_rule.html
+#
+# Usage
+# =====
+#
+#   $ ansible-playbook -i inventory fw_rules.yml
+
+- hosts: '{{ target | default("firewall") }}'
+  connection: local
+
+  vars:
+    device:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username | default(omit) }}'
+      password: '{{ password | default(omit) }}'
+      api_key: '{{ api_key | default(omit) }}'
+
+  tasks:
+    - name: Create List of security rules from HostVar
+      paloaltonetworks.panos.panos_op:
+        provider: '{{ device }}'
+        cmd: "{{ item }}"
+      loop: "{{ set_cli_rules_name_list_hostvar }}"
+
+    # - name: Create List of security rules from GroupVar
+    #   paloaltonetworks.panos.panos_op:
+    #     provider: '{{ device }}'
+    #     cmd: "{{ item }}"
+    #   loop: "{{ set_cli_rules_name_list_groupvar }}"
+           
