@@ -1,0 +1,34 @@
+---
+- hosts: '{{ target | default("firewall") }}'
+  connection: local
+
+  vars:
+    device:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username | default(omit) }}'
+      password: '{{ password | default(omit) }}'
+      api_key: '{{ api_key | default(omit) }}'
+    sc-name: testname
+    sc-region: canada-central
+    sc-ipsec-tunnel: detroit-windsor
+    bgp-as: 65001
+    bgp-secret: secretbgp
+    sc-tunnel-peer-ip: 192.168.1.100
+    sc-tunnel-local-ip: 192.168.2.100
+    set_cli_plugins:
+      - "set plugins cloud_services service-connection onboarding {{ sc-name }} protocol bgp enable yes"
+      - "set plugins cloud_services service-connection onboarding {{ sc-name }} protocol bgp peer-as {{ bgp-as }}"
+      - "set plugins cloud_services service-connection onboarding {{ sc-name }} protocol bgp peer-ip-address {{ sc-tunnel-peer-ip }}"
+      - "set plugins cloud_services service-connection onboarding {{ sc-name }} protocol bgp local-ip-address {{ sc-tunnel-local-ip }}"
+      - "set plugins cloud_services service-connection onboarding {{ sc-name }} protocol bgp secret {{ bgp-secret }}"
+      - "set plugins cloud_services service-connection onboarding {{ sc-name }} region {{ sc-region }}"
+      - "set plugins cloud_services service-connection onboarding {{ sc-name }}ipsec-tunnel {{ sc-ipsec-tunnel }}"
+      - "set plugins cloud_services service-connection onboarding {{ sc-name }} secondary-wan-enabled no"
+
+        tasks:
+          - name: Set List of OP commands
+            paloaltonetworks.panos.panos_op:
+              provider: '{{ device }}'
+              cmd: "{{ item }}"
+              ignore_disconnect: True
+            loop: "{{ set_cli_plugins }}"

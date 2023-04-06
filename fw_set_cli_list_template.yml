@@ -1,0 +1,25 @@
+---
+- hosts: '{{ target | default("firewall") }}'
+  connection: local
+
+  vars:
+    device:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username | default(omit) }}'
+      password: '{{ password | default(omit) }}'
+      api_key: '{{ api_key | default(omit) }}'
+    sc-endpoint-template: testname
+    tunnel-numer: 123
+    sc-ipsec-tunnel: detroit-windsor
+    tunnel-ip-mask: 192.168.1.100/24
+    set_cli_templates:
+      - "set template {{ sc-endpoint-template }} config network interface tunnel units {{ tunnel-number }} comment {{ sc-ipsec-tunnel }}"
+      - "set template {{ sc-endpoint-template }} config network interface tunnel units {{ tunnel-number }} ip {{ tunnel-ip-mask }}"
+
+        tasks:
+          - name: Set List of OP commands
+            paloaltonetworks.panos.panos_op:
+              provider: '{{ device }}'
+              cmd: "{{ item }}"
+              ignore_disconnect: True
+            loop: "{{ set_cli_templates }}"
